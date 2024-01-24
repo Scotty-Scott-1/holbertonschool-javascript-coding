@@ -4,19 +4,15 @@ const request = require('request');
 const url = process.argv[2];
 
 request(url, (error, response, body) => {
-  let i = 0;
   if (error) {
-    console.log('code:', response.error);
+    console.log(error);
   } else {
     const episodeInfo = JSON.parse(body).results;
-    const wedge = 18;
+    let myArray = [];
     for (const film of episodeInfo) {
-      for (const character of film.characters) {
-        if (character.includes(wedge)) {
-          i++;
-        }
-      }
+      const wedge = film.characters.filter(element => element.includes(18));
+      myArray = myArray.concat(wedge);
     }
+    console.log(myArray.length);
   }
-  console.log(i);
 });
