@@ -9,10 +9,10 @@ request(url, (error, response, body) => {
     console.log('code:', response.error);
   } else {
     const episodeInfo = JSON.parse(body).results;
-    const wedge = 'https://swapi-api.hbtn.io/api/people/18/';
+    const wedge = 18;
     for (const film of episodeInfo) {
       for (const character of film.characters) {
-        if (character === wedge) {
+        if (character.endsWith(wedge + '/')) {
           i++;
         }
       }
