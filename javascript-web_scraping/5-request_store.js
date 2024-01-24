@@ -7,13 +7,13 @@ const filePath = process.argv[3];
 
 request(url, (error, response, body) => {
   if (error) {
-    console.log(error);
+    console.error(error);
   }
   const content = body;
 
   fs.writeFile(filePath, content, 'utf8', (error) => {
     if (error) {
-      console.log(error);
+      console.error(error);
     }
   });
 });
