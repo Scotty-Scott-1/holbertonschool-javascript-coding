@@ -12,7 +12,7 @@ request(url, (error, response, body) => {
     const wedge = 18;
     for (const film of episodeInfo) {
       for (const character of film.characters) {
-        if (character.endsWith(wedge + '/')) {
+        if (character.includes(wedge)) {
           i++;
         }
       }
