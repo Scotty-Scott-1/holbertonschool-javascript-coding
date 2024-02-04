@@ -46,7 +46,9 @@ async function countStudents(db) {
     const line3 = `Number of students in SWE: ${result2.length}. List: ${resultStr3}`;
 
     const resultOb = {
-      result: `This is the list of our students\n${line1}\n${line2}\n${line3}`,
+      line1,
+      line2,
+      line3,
     };
     return resultOb;
   } catch (error) {
@@ -66,13 +68,14 @@ app.get('/', (req, res) => {
 });
 
 app.get('/students', async (req, res) => {
-  countStudents(db)
-    .then((result) => {
-      res.send(result.result);
-    })
-    .catch((error) => {
-      res.end(error.message);
-    });
+  try {
+    const result = await countStudents(db);
+    res.type('text/plain');
+    res.send(`This is the list of our students\n${result.line1}\n${result.line2}\n${result.line3}`);
+  } catch (error) {
+    res.type('text/plain');
+    res.end(error.message);
+  }
 });
 
 app.listen(port, () => {
