@@ -73,7 +73,7 @@ app.get('/students', async (req, res) => {
   } catch (error) {
     console.error('Error:', error.message);
     res.type('text/plain');
-    res.send('error opening db');
+    res.send('Cannot load the database');
   }
 });
 
