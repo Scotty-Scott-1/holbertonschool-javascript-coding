@@ -74,7 +74,7 @@ app.get('/students', async (req, res) => {
     res.send(`This is the list of our students\n${result.line1}\n${result.line2}\n${result.line3}`);
   } catch (error) {
     res.type('text/plain');
-    res.end(error.message);
+    res.send(`This is the list of our students\n${error.message}`);
   }
 });
 
