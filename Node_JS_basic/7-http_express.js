@@ -66,15 +66,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/students', async (req, res) => {
-  try {
-    const resultOb = await countStudents(db);
-    res.type('text/plain');
-    res.send(resultOb.result);
-  } catch (error) {
-    console.error('Error:', error.message);
-    res.type('text/plain');
-    res.send('Cannot load the database');
-  }
+  countStudents(db)
+    .then((result) => {
+      res.send(result.result);
+    })
+    .catch((error) => {
+      res.end(error.message);
+    });
 });
 
 app.listen(port, () => {
